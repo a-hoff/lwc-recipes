@@ -17,10 +17,18 @@ export default class ErrorPanel extends LightningElement {
         if (!Array.isArray(value)) {
             value = [value];
         }
-        // Filter out null items and error objects that don't have a message attribute.
+        // Filter out null items and assign a unique key to each error.
         // As a convenience, a component can pass all its @wired properties .error references even if they are null,
         // moving the burden of filtering from each individual component to this central location.
-        this._errors = value.filter(error => error && error.body.message);
+        this._errors = value
+            .filter(error => error)
+            .map((error, index) => {
+                const errorBodyWithKey = {
+                    key: index,
+                    body: JSON.stringify(error.body),
+                };
+                return errorBodyWithKey;
+            });
     }
 
     handleCheckboxChange(event) {
