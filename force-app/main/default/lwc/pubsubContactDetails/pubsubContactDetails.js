@@ -35,13 +35,13 @@ export default class PubsubContactDetails extends LightningElement {
 
     @wire(CurrentPageReference) pageRef;
 
-    @wire(getRecord, { recordId: '$recordId', fields })
+    @wire(getRecord, { recordId: 'BUTT12345678901', fields })
     wiredRecord({ error, data }) {
         if (error) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error loading contact',
-                    message: error.body.message,
+                    message: error.body[0].message,
                     variant: 'error',
                 }),
             );
