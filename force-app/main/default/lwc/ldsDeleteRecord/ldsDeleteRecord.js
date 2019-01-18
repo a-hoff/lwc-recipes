@@ -40,7 +40,7 @@ export default class LdsDeleteRecord extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Error deleting record',
-                        message: error.message,
+                        message: error.body.message,
                         variant: 'error',
                     }),
                 );
